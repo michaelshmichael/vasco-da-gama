@@ -1,94 +1,81 @@
-import React from 'react'
+import React, {useState} from 'react'
 
-class Registration extends React.Component {
-    constructor(){
-        super()
-        this.state = {
-            firstName: '',
-            surname: '',
-            dateOfBirth: '',
-            email: ''
-        }
+const Registration = () => {
+    const [firstName, setFirstName] = useState('');
+    const [surname, setSurname] = useState('');
+    const [dateOfBirth, setDateofBirth] = useState('');
+    const [email, setEmail] = useState('');
+
+    const handleUsernameChange = (e) => {
+        setFirstName(e.target.value)
     }
 
-    handleFirstNameChange(e) {
-        this.setState({
-            firstName: e.target.value
-        })
+    const handlePasswordChange = (e) => {
+        setSurname(e.target.value)
     }
 
-    handleSurnameChange(e) {
-        this.setState({
-            surname: e.target.value
-        })
-        console.log(this.state.surname)
+    const handleDateOfBirthChange = (e) => {
+        setDateofBirth(e.target.value)
     }
 
-    handleDateOfBirthChange(e) {
-        this.setState({
-            dateOfBirth: e.target.value
-        })
-        console.log(this.state.dateOfBirth)
+    const handleEmailChange = (e) => {
+        setEmail(e.target.value)
     }
 
-    handleEmailChange(e) {
-        this.setState({
-            email: e.target.value
-        })
-        console.log(this.state.email)
-    }
-
-    registerUser (e) {
+    const registerUser = (e) => {
+        //This doesn't do anything yet. Will send the use data to the database.
         e.preventDefault()
-        console.log(this.state.firstName)
+        console.log(firstName)
+        console.log(surname)
+        console.log(dateOfBirth)
+        console.log(email)
     }
 
-    render(){
-        return(
-            <div className='registrationForm'>
-            <form>
-            <div class="form-group">
-                        <label for="firstNameInput">First Name</label>
-                        <input type="text" 
-                            class="form-control" 
-                            id="firstNameInput"
-                            value={this.state.firstName}
-                            onChange={e=> this.handleFirstNameChange(e)}
-                        ></input>
-                    </div>
-                    <div class="form-group">
-                        <label for="surnameInput">Surname</label>
-                        <input type="text" 
-                            class="form-control" 
-                            id="surnameInput"
-                            value={this.state.surname}
-                            onChange={e=> this.handleSurnameChange(e)}
-                        ></input>
-                    </div>
-                    <div class="form-group">
-                        <label for="dobInput">Date of Birth</label>
-                        <input type="date" 
-                            class="form-control" 
-                            id="dobInput"
-                            value={this.state.dateOfBirth}
-                            onChange={e=> this.handleDateOfBirthChange(e)}
-                        ></input>
-                    </div>
-                    <div class="form-group">
-                        <label for="emailInput">Email</label>
-                        <input type="email" 
-                            class="form-control" 
-                            id="emailInput"
-                            value={this.state.email}
-                            onChange={e=> this.handleEmailChange(e)}
-                        ></input>
-                    </div>
-                    <button className='btn btn-primary' onClick={this.registerUser.bind(this)}>Register</button>
+    return(
+        <div className='registrationForm'>
+            <form method='post' action='#' autocomplete='off'>
+                <div class="form-group">
+                    <label for="usernameInput">Username</label>
+                    <input type="text" 
+                        class="form-control"
+                        id="usernameInput"
+                        value={firstName}
+                        onChange={e => handleUsernameChange(e)}
+                    ></input>
+                </div>
+                <div class="form-group">
+                    <label for="passwordInput">Password</label>
+                    <input type="password" 
+                        class="form-control"
+                        id="passwordInput"
+                        value={surname}
+                        onChange={e => handlePasswordChange(e)}
+                    ></input>
+                </div>
+                <div class="form-group">
+                    <label for="dobInput">Date of Birth</label>
+                    <input type="date" 
+                        class="form-control"
+                        
+                        id="dobInput"
+                        value={dateOfBirth}
+                        onChange={e => handleDateOfBirthChange(e)}
+                    ></input>
+                </div>
+                <div class="form-group">
+                    <label for="emailInput">Email</label>
+                    <input type="email" 
+                        class="form-control"
+                        
+                        id="emailInput"
+                        value={email}
+                        onChange={e => handleEmailChange(e)}
+                    ></input>
+                </div>
+                <button className='btn btn-primary' onClick={registerUser}>Register</button>
             </form>
-               
-            </div>
-        )
-    }
+        </div>
+    )
 }
 
 export default Registration
